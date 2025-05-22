@@ -24,17 +24,28 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [windows-latest, windows-arm]
         backend: [vulkan, opengl]
         include:
-          - backend: vulkan
+          - os: windows-latest
+            backend: vulkan
             artifact_name: zed-release
             rustflags: ""
-          - backend: opengl
+          - os: windows-latest
+            backend: opengl
             artifact_name: zed-release-opengl
             rustflags: "--cfg gles"
+          - os: windows-arm
+            backend: vulkan
+            artifact_name: zed-release-arm
+            rustflags: "--cfg arm"
+          - os: windows-arm
+            backend: opengl
+            artifact_name: zed-release-opengl-arm
+            rustflags: "--cfg gles --cfg arm"
 
     steps:
       - name: Enable long paths in Git

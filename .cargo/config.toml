@@ -1,4 +1,8 @@
 [target."cfg(all())"]
 rustflags = []
+
+[target."cfg(target_arch = \"aarch64\")"]
+rustflags = ["-C", "target-feature=+neon"]
+
 [profile.release]
 debug = false

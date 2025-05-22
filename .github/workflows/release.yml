@@ -32,9 +32,13 @@ jobs:
         run: |
           mv artifacts/zed-release/zed.exe zed.exe
           mv artifacts/zed-release-opengl/zed.exe zed-opengl.exe
+          mv artifacts/zed-release-arm/zed.exe zed-arm.exe
+          mv artifacts/zed-release-opengl-arm/zed.exe zed-opengl-arm.exe
           zip zed.zip -9 zed.exe
           zip zed-opengl.zip -9 zed-opengl.exe
-          sha256sum zed.exe zed-opengl.exe zed.zip zed-opengl.zip > sha256sums.txt
+          zip zed-arm.zip -9 zed-arm.exe
+          zip zed-opengl-arm.zip -9 zed-opengl-arm.exe
+          sha256sum zed.exe zed-opengl.exe zed-arm.exe zed-opengl-arm.exe zed.zip zed-opengl.zip zed-arm.zip zed-opengl-arm.zip > sha256sums.txt
 
       - name: Upload release build artifacts to GitHub Release
         uses: softprops/action-gh-release@v2
@@ -48,6 +52,10 @@ jobs:
           files: |
             zed.exe
             zed-opengl.exe
+            zed-arm.exe
+            zed-opengl-arm.exe
             zed.zip
             zed-opengl.zip
+            zed-arm.zip
+            zed-opengl-arm.zip
             sha256sums.txt
