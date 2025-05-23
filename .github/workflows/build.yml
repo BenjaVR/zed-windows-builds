@@ -76,12 +76,11 @@ jobs:
         shell: pwsh
         run: ./Parse-Rustflags.ps1 ${{ matrix.rustflags }}
 
-      - name: Add ARM64 target
-        run: rustup target add aarch64-pc-windows-msvc
-
       - name: Build release
         working-directory: zed
-        run: cargo build --release --target aarch64-pc-windows-msvc
+        run: |
+          rustup target add aarch64-pc-windows-msvc
+          cargo build --release --target aarch64-pc-windows-msvc
 
       - name: Archive build
         uses: actions/upload-artifact@v4
