@@ -26,10 +26,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-11-arm]
+        os: [windows-latest]
         backend: [vulkan]
         include:
-          - os: windows-11-arm
+          - os: windows-latest
             backend: vulkan
             artifact_name: zed-release-arm
             rustflags: "--cfg arm"
